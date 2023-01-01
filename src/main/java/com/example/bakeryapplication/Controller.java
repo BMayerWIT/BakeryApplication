@@ -62,6 +62,7 @@ public class Controller {
             BakedGoods selectedGood = (BakedGoods) goods.get(i);
             if (goods.search(searchedPhrase))
             searchList.getItems().add(selectedGood);
+            //
 
         }
     }
