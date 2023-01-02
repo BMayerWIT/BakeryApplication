@@ -51,8 +51,8 @@ public class Controller {
 
     @FXML
     public void removeBakedGood(MouseEvent event) {
-        BakedGoods selectedGood = bakedGoodListView.getSelectionModel().getSelectedItem();
-        goods.deleteNode(selectedGood.getIngredientIndex());
+       // BakedGoods selectedGood = bakedGoodListView.getSelectionModel().getSelectedItem();
+      //  goods.deleteNode(selectedGood.getIngredientIndex());
 
     }
     
@@ -60,10 +60,9 @@ public class Controller {
         String searchedPhrase = searchField.getText();
         for (int i = 0; i < goods.numberOfNodes() + 1; i++) {
             BakedGoods selectedGood = (BakedGoods) goods.get(i);
-            if (goods.search(searchedPhrase))
-            searchList.getItems().add(selectedGood);
+          //  if (goods.search(searchedPhrase))
+          //  searchList.getItems().add(selectedGood);
             //
-
         }
     }
 }
