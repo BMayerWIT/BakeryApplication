@@ -14,8 +14,11 @@ public class Controller {
     public LinkedList<BakedGoods> goods = new LinkedList<>();
     public LinkedList<Ingredients> ingredientsList = new LinkedList<>();
     private int printGoodIndex = 0;
+    private int printRecipeIndex = 0;
     private String bakedGoodsList = "";
     private String ingredientNameList = "";
+    private String recipeNameList = "";
+
 
 
 
@@ -62,7 +65,7 @@ public class Controller {
     private TextField recipeDescription;
 
     @FXML
-    private ListView<?> recipeListView;
+    private ListView<Recipe> recipeListView;
 
     @FXML
     private TextField searchField;
@@ -82,7 +85,7 @@ public class Controller {
         String description = goodDescription.getText();
         BakedGoods bg = new BakedGoods(goodName, countryOfOrigin, description);
         if (bakedGoodsList.contains(goodName)) {
-            System.out.println(("Baked Good with this name already exists."));
+            System.out.println(("Recipe with this name already exists."));
         } else {
             goods.add(bg);
             bakedGoodsList += goodName;
@@ -177,7 +180,32 @@ public class Controller {
 
     @FXML
     void addRecipe(ActionEvent event) {
+        String rName = bakedGoodName.getText();
 
+         Recipe recipe = new Recipe(rName);
+        if (recipeNameList.contains(rName)) {
+            System.out.println(("Baked Good with this name already exists."));
+        } else {
+            BakedGoods selectedGood = bakedGoodChoice.getSelectionModel().getSelectedItem();
+            selectedGood.recipes.add(recipe);
+            recipeNameList += rName;
+            populateRecipeList();
+
+            System.out.println(selectedGood.recipes.get(printRecipeIndex));
+            printRecipeIndex++;
+            System.out.println("No of cases : " + selectedGood.recipes.numberOfNodes());
+
+        }
+    }
+
+    void populateRecipeList() {
+        recipeListView.getItems().clear();
+        BakedGoods selectedGood = bakedGoodChoice.getSelectionModel().getSelectedItem();
+        for (int i = 0; i < selectedGood.recipes.numberOfNodes(); i++) {
+            Recipe recipe = (Recipe) selectedGood.recipes.get(i+1);
+            recipeListView.getItems().add(recipe);
+            recipeNameList += recipe.getRecipeName();
+        }
     }
 
     @FXML
