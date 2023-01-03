@@ -250,7 +250,7 @@ public class Controller {
         goods.remove();
         ingredientsList.remove();
         bakedGoodListView.getItems().clear();
-        searchIngredientList.getItems().clear();
+        searchedIngredientList.getItems().clear();
         recipeListView.getItems().clear();
     }
 
