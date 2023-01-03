@@ -210,11 +210,19 @@ public class Controller {
 
     @FXML
     void deleteRecipe(ActionEvent event) {
-
+        BakedGoods selectedGood = bakedGoodChoice.getSelectionModel().getSelectedItem();
+        selectedGood.recipes.deleteNode(recipeListView.getSelectionModel().getSelectedIndex());
+        populateRecipeList();
+        recipeNameList = "";
     }
 
     @FXML
     void editBakedGood(ActionEvent event) {
+
+    }
+
+    @FXML
+    void editIngredient(ActionEvent event) {
 
     }
 
@@ -226,6 +234,11 @@ public class Controller {
 
     @FXML
     void updateBakedGood(ActionEvent event) {
+
+    }
+
+    @FXML
+    void updateIngredient(ActionEvent event) {
 
     }
 
