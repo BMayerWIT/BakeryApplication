@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bakeryapplication.Controller">
@@ -49,7 +50,7 @@
                                 <Label layoutX="14.0" layoutY="169.0" />
                                 <TextField fx:id="calories" layoutX="138.0" layoutY="61.0" prefHeight="26.0" prefWidth="78.0" />
                                 <Button layoutX="373.0" layoutY="117.0" mnemonicParsing="false" onAction="#addIngredient" stylesheets="@style.css" text="Add Ingredient" />
-                                <ListView fx:id="ingredientList" layoutX="23.0" layoutY="99.0" prefHeight="194.0" prefWidth="325.0" />
+                                <ListView fx:id="ingredientListView" layoutX="23.0" layoutY="99.0" prefHeight="194.0" prefWidth="325.0" />
                                 <Label layoutX="14.0" layoutY="61.0" prefHeight="26.0" prefWidth="124.0" text="Calories(kcal per 100g):" />
                                 <Label layoutX="234.0" layoutY="24.0" text="Textual Description:" />
                                 <Button layoutX="373.0" layoutY="165.0" mnemonicParsing="false" onAction="#editIngredient" text="Edit" />
@@ -64,15 +65,25 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="656.0" style="-fx-background-color: #ede4c7#ede4c7;">
                             <children>
                                 <TextField fx:id="grams" layoutX="486.0" layoutY="350.0" prefHeight="26.0" prefWidth="90.0" promptText="Measurement" />
-                                <Button layoutX="32.0" layoutY="316.0" mnemonicParsing="false" onAction="#addRecipe" stylesheets="@style.css" text="Add Recipe" />
-                                <ListView fx:id="recipeListView" layoutX="18.0" layoutY="94.0" prefHeight="200.0" prefWidth="172.0" />
-                                <Button layoutX="215.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteRecipe" stylesheets="@style.css" text="Delete Recipe" />
+                                <Button layoutX="14.0" layoutY="316.0" mnemonicParsing="false" onAction="#addRecipe" stylesheets="@style.css" text="Add Recipe" />
+                                <ListView fx:id="recipeListView" layoutX="18.0" layoutY="94.0" onMouseClicked="#populateRecipeIngredientListView" prefHeight="200.0" prefWidth="172.0" />
+                                <Button layoutX="118.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteRecipe" stylesheets="@style.css" text="Delete Recipe" />
                                 <Label layoutX="14.0" layoutY="23.0" text="Pick Baked Good:" />
                                 <ChoiceBox fx:id="bakedGoodChoice" layoutX="109.0" layoutY="20.0" prefHeight="25.0" prefWidth="119.0" />
                         <TextField fx:id="recipeName" layoutX="33.0" layoutY="57.0" prefHeight="26.0" prefWidth="75.0" promptText="Name" />
-                        <ListView fx:id="ingredientList2" layoutX="444.0" layoutY="94.0" prefHeight="200.0" prefWidth="173.0" />
+                        <ListView fx:id="ingredientListView2" layoutX="444.0" layoutY="94.0" prefHeight="200.0" prefWidth="173.0" />
                         <Button layoutX="483.0" layoutY="316.0" mnemonicParsing="false" onAction="#addIngredientToRecipe" stylesheets="@style.css" text="Add Ingredient" />
                         <ListView fx:id="recipeIngredientListView" layoutX="231.0" layoutY="94.0" prefHeight="200.0" prefWidth="172.0" />
+                        <Text layoutX="235.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipe Ingredients" wrappingWidth="164.13671875">
+                           <font>
+                              <Font name="Comic Sans MS" size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="468.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Ingredients" wrappingWidth="125.13671875">
+                           <font>
+                              <Font name="Comic Sans MS" size="17.0" />
+                           </font>
+                        </Text>
                             </children>
                         </AnchorPane>
                     </content>
@@ -96,10 +107,11 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ede4c7#ede4c7;">
                             <children>
-                                <TextField fx:id="searchField" layoutX="202.0" layoutY="28.0" prefHeight="25.0" prefWidth="207.0" />
+                                <TextField fx:id="searchField" layoutX="203.0" layoutY="39.0" prefHeight="25.0" prefWidth="207.0" />
                                 <Button layoutX="280.0" layoutY="64.0" mnemonicParsing="false" onAction="#Search" text="Search" />
                         <ListView fx:id="searchList" layoutX="14.0" layoutY="104.0" onMouseClicked="#populateIngredientSearchList" prefHeight="182.0" prefWidth="283.0" />
                         <ListView fx:id="searchedIngredientList" layoutX="315.0" layoutY="104.0" prefHeight="182.0" prefWidth="283.0" />
+                        <ChoiceBox fx:id="searchFilter" layoutX="350.0" layoutY="64.0" prefHeight="25.0" prefWidth="119.0" />
                             </children>
                         </AnchorPane>
                     </content>

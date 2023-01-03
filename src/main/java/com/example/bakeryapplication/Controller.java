@@ -23,6 +23,7 @@ public class Controller {
     public LinkedList<Ingredients> ingredientsList = new LinkedList<>();
     private int printGoodIndex = 0;
     private int printRecipeIndex = 0;
+    private int printIngredientIndex = 0;
     private String bakedGoodsList = "";
     private String ingredientNameList = "";
     private String recipeNameList = "";
@@ -55,7 +56,7 @@ public class Controller {
     private TextField ingredientDescription;
 
     @FXML
-    private ListView<Ingredients> ingredientsListView;
+    private ListView<Ingredients> ingredientListView;
 
     @FXML
     private TextField ingredientName;
@@ -72,9 +73,9 @@ public class Controller {
     @FXML
     private ListView<Recipe> recipeListView;
     @FXML
-    private ListView<Ingredients> recipeIngredientsListView;
+    private ListView<Ingredients> recipeIngredientListView;
     @FXML
-    private ListView<Ingredients> ingredientsListView2;
+    private ListView<Ingredients> ingredientListView2;
     @FXML
     private TextField recipeName;
     @FXML
@@ -82,9 +83,11 @@ public class Controller {
     @FXML
     private ListView<?> value;
     @FXML
-    private ListView<BakedGoods> searchList;
+    private ListView<Object> searchList;
     @FXML
-    private ListView<Ingredients> searchIngredientList;
+    private ListView<Object> searchedIngredientList;
+    @FXML
+    private ChoiceBox<String> searchFilter;
 
 
 
@@ -127,26 +130,98 @@ public class Controller {
     @FXML
     void Search(ActionEvent event) {
         searchList.getItems().clear();
+        searchedIngredientList.getItems().clear();
         String searchedPhrase = searchField.getText();
-        for (int i = 0; i < goods.numberOfNodes(); i++) {
-            BakedGoods selectedGood = (BakedGoods) goods.get(i+1);
-            if (selectedGood.getBakedGoodName().contains(searchedPhrase)) {
-                searchList.getItems().add(selectedGood);
+
+        if (searchFilter.getSelectionModel().getSelectedItem().contains("Baked Good")) {
+            for (int i = 0; i < goods.numberOfNodes(); i++) {
+                BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
+                if (selectedGood.getBakedGoodName().contains(searchedPhrase)) {
+                    searchList.getItems().add(selectedGood);
+                }
             }
         }
+
+        if (searchFilter.getSelectionModel().getSelectedItem().contains("Recipe")) {
+            for (int i = 0; i < goods.numberOfNodes(); i++) {
+                BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
+                for (int k = 0; k < selectedGood.recipes.numberOfNodes(); k++) {
+                    Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
+                    if (selectedRecipe.getRecipeName().contains(searchedPhrase)) {
+                        searchList.getItems().add(selectedRecipe);
+                    }
+                }
+            }
+        }
+
+        if (searchFilter.getSelectionModel().getSelectedItem().contains("Ingredients")) {
+            for (int i = 0; i < goods.numberOfNodes(); i++) {
+                BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
+                for (int k = 0; k < selectedGood.recipes.numberOfNodes(); k++) {
+                    Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
+                    for (int j = 0; j < selectedRecipe.ingredients.numberOfNodes(); j++) {
+                        Ingredients selectedIngredient = (Ingredients) selectedRecipe.ingredients.get(i);
+                        if (selectedIngredient.getIngredientName().contains(searchedPhrase)) {
+                            searchList.getItems().add(selectedIngredient);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     @FXML
     void populateIngredientSearchList() {
-        searchIngredientList.getItems().clear();
-        BakedGoods selectedGood = searchList.getSelectionModel().getSelectedItem();
-        for (int i = 0; i < selectedGood.recipes.numberOfNodes(); i++) {
-            Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
-            for (int k = 0; i < selectedRecipe.ingredients.numberOfNodes(); k++) {
-                Ingredients recipeIngredients = (Ingredients) selectedRecipe.ingredients.get(i);
-                searchIngredientList.getItems().add(recipeIngredients);
+        searchedIngredientList.getItems().clear();
+        Object selectedObject = searchList.getSelectionModel().getSelectedItem();
+
+        if (searchFilter.getSelectionModel().getSelectedItem().contains("Baked Good")) {
+            for (int i = 0; i < goods.numberOfNodes(); i++) {
+                BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
+                if (selectedObject.equals(selectedGood)) {
+                    for (int j = 0; j < selectedGood.recipes.numberOfNodes(); j++) {
+                        Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i + 1);
+                        for (int k = 0; k < selectedRecipe.ingredients.numberOfNodes(); k++) {
+                            Ingredients selectedIngredient = (Ingredients) selectedRecipe.ingredients.get(i + 1);
+                            searchedIngredientList.getItems().add(selectedIngredient);
+                        }
+                    }
+                }
             }
         }
+
+        if (searchFilter.getSelectionModel().getSelectedItem().contains("Ingredients")) {
+            for (int i = 0; i < goods.numberOfNodes(); i++) {
+                BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
+                for (int j = 0; j < selectedGood.recipes.numberOfNodes(); j++) {
+                    Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
+                    for (int k = 0; k < selectedRecipe.ingredients.numberOfNodes(); k++) {
+                        Ingredients selectedIngredient = (Ingredients) selectedRecipe.ingredients.get(i + 1);
+                        if (selectedObject.equals(selectedIngredient)) {
+                            searchedIngredientList.getItems().add(selectedGood);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (searchFilter.getSelectionModel().getSelectedItem().contains("Recipe")) {
+            for (int i = 0; i < goods.numberOfNodes(); i++) {
+                BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
+                for (int j = 0; j < selectedGood.recipes.numberOfNodes(); j++) {
+                    Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
+                    if (selectedObject.equals(selectedRecipe)) {
+                        for (int k = 0; k < selectedRecipe.ingredients.numberOfNodes(); k++) {
+                            Ingredients selectedIngredient = (Ingredients) selectedRecipe.ingredients.get(i + 1);
+                            searchedIngredientList.getItems().add(selectedIngredient);
+
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     @FXML
@@ -192,23 +267,39 @@ public class Controller {
 
     @FXML
     public void addIngredient (ActionEvent actionEvent) {
-        Ingredients ingredient = new Ingredients(ingredientName.getText(), ingredientDescription.getText(), Integer.parseInt(calories.getText()));
-        ingredientsList.add(ingredient);
-        populateIngredientList();
-        chooseIngredient.getItems().add(ingredient);
+
+
+        String igName = ingredientName.getText();
+        String description = ingredientDescription.getText();
+        int cals = Integer.parseInt(calories.getText());
+        Ingredients ingredient = new Ingredients(igName, description, cals);
+        if (ingredientNameList.contains(igName)) {
+            System.out.println(("Ingredient with this name already exists."));
+        } else {
+
+            ingredientsList.add(ingredient);
+            ingredientListView2.getItems().add(ingredient);
+            ingredientNameList += igName;
+            populateIngredientList();
+
+            System.out.println(ingredientsList.get(printIngredientIndex));
+            printIngredientIndex++;
+            System.out.println("No of cases : " + ingredientsList.numberOfNodes());
+
+        }
     }
 
     public void populateIngredientList() {
-        ingredientsListView.getItems().clear();
+        ingredientListView.getItems().clear();
         for (int i = 0; i < ingredientsList.numberOfNodes(); i++) {
             Ingredients ig = (Ingredients) ingredientsList.get(i+1);
-            ingredientsListView.getItems().add(ig);
+            ingredientListView.getItems().add(ig);
             ingredientNameList += ig.getIngredientName();
         }
     }
 
     public void deleteIngredient(ActionEvent event) {
-        ingredientsList.deleteNode(ingredientsListView.getSelectionModel().getSelectedIndex());
+        ingredientsList.deleteNode(ingredientListView.getSelectionModel().getSelectedIndex());
         populateIngredientList();
         ingredientNameList = "";
     }
@@ -218,7 +309,7 @@ public class Controller {
     void addRecipe(ActionEvent event) {
         String rName = recipeName.getText();
 
-         Recipe recipe = new Recipe(rName);
+        Recipe recipe = new Recipe(rName);
         if (recipeNameList.contains(rName)) {
             System.out.println(("Baked Good with this name already exists."));
         } else {
@@ -253,8 +344,23 @@ public class Controller {
     }
 
     @FXML
-    void addIngredientToRecipe() {
+    void populateRecipeIngredientListView() {
+        recipeIngredientListView.getItems().clear();
+        Recipe selectedRecipe = recipeListView.getSelectionModel().getSelectedItem();
+        for (int i = 0; i < selectedRecipe.ingredients.numberOfNodes(); i++) {
+            Ingredients ingredient = (Ingredients) selectedRecipe.ingredients.get(i+1);
+            recipeIngredientListView.getItems().add(ingredient);
+        }
+    }
 
+    @FXML
+    void addIngredientToRecipe() {
+        Recipe selectedRecipe = recipeListView.getSelectionModel().getSelectedItem();
+        Ingredients ingredient = ingredientListView2.getSelectionModel().getSelectedItem();
+        float quantity = Float.parseFloat(grams.getText());
+        ingredient.setQuantity(quantity);
+        selectedRecipe.ingredients.add(ingredient);
+        populateRecipeIngredientListView();
     }
 
 
@@ -292,6 +398,10 @@ public class Controller {
     @FXML
     void viewAllBakedGoods(ActionEvent event) {
 
+    }
+
+    public void initialize() {
+        searchFilter.getItems().addAll("Baked Good", "Ingredients", "Recipe");
     }
 
 
