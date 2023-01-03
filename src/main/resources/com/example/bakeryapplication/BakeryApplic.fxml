@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bakeryapplication.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bakeryapplication.Controller">
     <padding>
         <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
     </padding>
     <top>
-        <TabPane prefHeight="329.0" prefWidth="621.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <TabPane prefHeight="400.0" prefWidth="668.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab id="tab" text="Baked Good">
                     <content>
@@ -61,23 +61,18 @@
                 </Tab>
                 <Tab text="Recipe">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ede4c7#ede4c7;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="668.0" style="-fx-background-color: #ede4c7#ede4c7;">
                             <children>
-                                <Label layoutX="449.0" layoutY="15.0" text="Description:" />
-                                <TextField fx:id="recipeDescription" layoutX="438.0" layoutY="38.0" prefHeight="47.0" prefWidth="160.0" />
-                                <Label layoutX="239.0" layoutY="24.0" text="Measurements (g):" />
-                                <TextField fx:id="grams" layoutX="339.0" layoutY="19.0" prefHeight="26.0" prefWidth="75.0" />
-                                <Button layoutX="343.0" layoutY="110.0" mnemonicParsing="false" onAction="#addRecipe" stylesheets="@style.css" text="Add Recipe" />
-                                <ChoiceBox fx:id="chooseIngredient" layoutX="84.0" layoutY="57.0" prefHeight="26.0" prefWidth="95.0" stylesheets="@style.css" />
-                                <Text layoutX="14.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredients:" />
-                                <ListView fx:id="recipeListView" layoutX="18.0" layoutY="94.0" prefHeight="200.0" prefWidth="302.0" />
-                                <Button layoutX="343.0" layoutY="208.0" mnemonicParsing="false" onAction="#deleteRecipe" stylesheets="@style.css" text="Delete Recipe" />
-                                <Label layoutX="14.0" layoutY="23.0" text="Pick Baked Good:" />
-                                <ChoiceBox fx:id="bakedGoodChoice" layoutX="109.0" layoutY="20.0" prefHeight="25.0" prefWidth="119.0" />
-                                <Button layoutX="343.0" layoutY="159.0" mnemonicParsing="false" onAction="#editRecipe" text="Edit" />
-                                <Button layoutX="401.0" layoutY="159.0" mnemonicParsing="false" onAction="#updateRecipe" text="Update" />
-                                <Label layoutX="239.0" layoutY="53.0" text="Measurements (ml):" />
-                                <TextField fx:id="mL" layoutX="346.0" layoutY="49.0" prefHeight="26.0" prefWidth="69.0" />
+                                <TextField fx:id="grams" layoutX="501.0" layoutY="324.0" prefHeight="26.0" prefWidth="87.0" promptText="Measurment" />
+                                <Button layoutX="39.0" layoutY="324.0" mnemonicParsing="false" onAction="#addRecipe" stylesheets="@style.css" text="Add Recipe" />
+                                <ListView fx:id="recipeListView" layoutX="19.0" layoutY="127.0" prefHeight="190.0" prefWidth="269.0" />
+                                <Button layoutX="191.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteRecipe" stylesheets="@style.css" text="Delete Recipe" />
+                                <ChoiceBox fx:id="bakedGoodChoice" layoutX="18.0" layoutY="20.0" prefHeight="25.0" prefWidth="119.0" />
+                                <Button layoutX="135.0" layoutY="324.0" mnemonicParsing="false" onAction="#editRecipe" text="Edit" />
+                        <ListView fx:id="recipeIngredientListView" layoutX="335.0" layoutY="127.0" prefHeight="190.0" prefWidth="269.0" />
+                        <Button layoutX="342.0" layoutY="324.0" mnemonicParsing="false" onAction="#addIngredientToRecipe" prefHeight="25.0" prefWidth="114.0" stylesheets="@style.css" text="Add Ingredient" />
+                        <TextField fx:id="recipeName" layoutX="49.0" layoutY="83.0" prefHeight="26.0" prefWidth="75.0" />
+                        <Label fx:id="mL1" layoutX="51.0" layoutY="54.0" text="Recipe Name" />
                             </children>
                         </AnchorPane>
                     </content>
