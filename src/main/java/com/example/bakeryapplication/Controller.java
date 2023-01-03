@@ -27,9 +27,6 @@ public class Controller {
     private String ingredientNameList = "";
     private String recipeNameList = "";
 
-
-
-
     @FXML
     private ChoiceBox<BakedGoods> bakedGoodChoice;
 
