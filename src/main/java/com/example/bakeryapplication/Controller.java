@@ -15,6 +15,7 @@ public class Controller {
     public LinkedList<Ingredients> ingredientsList = new LinkedList<>();
     private int printGoodIndex = 0;
     private int printRecipeIndex = 0;
+    private int printIngredientIndex = 0;
     private String bakedGoodsList = "";
     private String ingredientNameList = "";
     private String recipeNameList = "";
@@ -50,7 +51,7 @@ public class Controller {
     private TextField ingredientDescription;
 
     @FXML
-    private ListView<Ingredients> ingredientsListView;
+    private ListView<Ingredients> ingredientListView;
 
     @FXML
     private TextField ingredientName;
@@ -67,9 +68,9 @@ public class Controller {
     @FXML
     private ListView<Recipe> recipeListView;
     @FXML
-    private ListView<Ingredients> recipeIngredientsListView;
+    private ListView<Ingredients> recipeIngredientListView;
     @FXML
-    private ListView<Ingredients> ingredientsListView2;
+    private ListView<Ingredients> ingredientListView2;
     @FXML
     private TextField recipeName;
     @FXML
@@ -161,23 +162,39 @@ public class Controller {
 
     @FXML
     public void addIngredient (ActionEvent actionEvent) {
-        Ingredients ingredient = new Ingredients(ingredientName.getText(), ingredientDescription.getText(), Integer.parseInt(calories.getText()));
-        ingredientsList.add(ingredient);
-        populateIngredientList();
-        chooseIngredient.getItems().add(ingredient);
+
+
+        String igName = ingredientName.getText();
+        String description = ingredientDescription.getText();
+        int cals = Integer.parseInt(calories.getText());
+        Ingredients ingredient = new Ingredients(igName, description, cals);
+        if (ingredientNameList.contains(igName)) {
+            System.out.println(("Ingredient with this name already exists."));
+        } else {
+
+            ingredientsList.add(ingredient);
+            ingredientListView2.getItems().add(ingredient);
+            ingredientNameList += igName;
+            populateIngredientList();
+
+            System.out.println(ingredientsList.get(printIngredientIndex));
+            printIngredientIndex++;
+            System.out.println("No of cases : " + ingredientsList.numberOfNodes());
+
+        }
     }
 
     public void populateIngredientList() {
-        ingredientsListView.getItems().clear();
+        ingredientListView.getItems().clear();
         for (int i = 0; i < ingredientsList.numberOfNodes(); i++) {
             Ingredients ig = (Ingredients) ingredientsList.get(i+1);
-            ingredientsListView.getItems().add(ig);
+            ingredientListView.getItems().add(ig);
             ingredientNameList += ig.getIngredientName();
         }
     }
 
     public void deleteIngredient(ActionEvent event) {
-        ingredientsList.deleteNode(ingredientsListView.getSelectionModel().getSelectedIndex());
+        ingredientsList.deleteNode(ingredientListView.getSelectionModel().getSelectedIndex());
         populateIngredientList();
         ingredientNameList = "";
     }
@@ -222,8 +239,23 @@ public class Controller {
     }
 
     @FXML
-    void addIngredientToRecipe() {
+    void populateRecipeIngredientListView() {
+        recipeIngredientListView.getItems().clear();
+        Recipe selectedRecipe = recipeListView.getSelectionModel().getSelectedItem();
+        for (int i = 0; i < selectedRecipe.ingredients.numberOfNodes(); i++) {
+            Ingredients ingredient = (Ingredients) selectedRecipe.ingredients.get(i+1);
+            recipeIngredientListView.getItems().add(ingredient);
+        }
+    }
 
+    @FXML
+    void addIngredientToRecipe() {
+        Recipe selectedRecipe = recipeListView.getSelectionModel().getSelectedItem();
+        Ingredients ingredient = ingredientListView2.getSelectionModel().getSelectedItem();
+        float quantity = Float.parseFloat(grams.getText());
+        ingredient.setQuantity(quantity);
+        selectedRecipe.ingredients.add(ingredient);
+        populateRecipeIngredientListView();
     }
 
 

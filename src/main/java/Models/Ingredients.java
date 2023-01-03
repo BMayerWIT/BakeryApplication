@@ -8,6 +8,8 @@ public class Ingredients {
 
     private int calories = 0;
 
+    private float quantity = 0;
+
     public Ingredients(String ingredientName, String description, int calories) {
         this.ingredientName = ingredientName;
         this.description = description;
@@ -36,6 +38,14 @@ public class Ingredients {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
     }
 
     @Override
