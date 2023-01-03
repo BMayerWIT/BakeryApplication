@@ -107,7 +107,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ede4c7#ede4c7;">
                             <children>
-                                <TextField fx:id="searchField" layoutX="202.0" layoutY="28.0" prefHeight="25.0" prefWidth="207.0" />
+                                <TextField fx:id="searchField" layoutX="203.0" layoutY="39.0" prefHeight="25.0" prefWidth="207.0" />
                                 <Button layoutX="280.0" layoutY="64.0" mnemonicParsing="false" onAction="#Search" text="Search" />
                         <ListView fx:id="searchList" layoutX="14.0" layoutY="104.0" onMouseClicked="#populateIngredientSearchList" prefHeight="182.0" prefWidth="283.0" />
                         <ListView fx:id="searchedIngredientList" layoutX="315.0" layoutY="104.0" prefHeight="182.0" prefWidth="283.0" />
