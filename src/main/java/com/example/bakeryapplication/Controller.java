@@ -264,8 +264,14 @@ public class Controller {
         goods.remove();
         ingredientsList.remove();
         bakedGoodListView.getItems().clear();
+        ingredientListView.getItems().clear();
+        recipeIngredientListView.getItems().clear();
+        ingredientListView2.getItems().clear();
         searchedIngredientList.getItems().clear();
         recipeListView.getItems().clear();
+        bakedGoodsList = "";
+        ingredientNameList = "";
+        recipeNameList = "";
     }
 
     @FXML
