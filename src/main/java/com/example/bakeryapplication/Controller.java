@@ -66,16 +66,21 @@ public class Controller {
 
     @FXML
     private ListView<Recipe> recipeListView;
-
+    @FXML
+    private ListView<Ingredients> recipeIngredientsListView;
+    @FXML
+    private ListView<Ingredients> ingredientsListView2;
+    @FXML
+    private TextField recipeName;
     @FXML
     private TextField searchField;
-
     @FXML
     private ListView<?> value;
     @FXML
     private ListView<BakedGoods> searchList;
     @FXML
     private ListView<Ingredients> searchIngredientList;
+
 
 
     @FXML
@@ -180,7 +185,7 @@ public class Controller {
 
     @FXML
     void addRecipe(ActionEvent event) {
-        String rName = bakedGoodName.getText();
+        String rName = recipeName.getText();
 
          Recipe recipe = new Recipe(rName);
         if (recipeNameList.contains(rName)) {
@@ -215,6 +220,12 @@ public class Controller {
         populateRecipeList();
         recipeNameList = "";
     }
+
+    @FXML
+    void addIngredientToRecipe() {
+
+    }
+
 
     @FXML
     void editBakedGood(ActionEvent event) {

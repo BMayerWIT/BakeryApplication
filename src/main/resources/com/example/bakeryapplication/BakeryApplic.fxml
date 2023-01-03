@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bakeryapplication.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bakeryapplication.Controller">
     <padding>
         <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
     </padding>
     <top>
-        <TabPane prefHeight="329.0" prefWidth="621.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <TabPane prefHeight="436.0" prefWidth="633.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab id="tab" text="Baked Good">
                     <content>
@@ -61,15 +61,18 @@
                 </Tab>
                 <Tab text="Recipe">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ede4c7#ede4c7;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="656.0" style="-fx-background-color: #ede4c7#ede4c7;">
                             <children>
-                                <Label layoutX="239.0" layoutY="24.0" text="Measurements (g):" />
-                                <TextField fx:id="grams" layoutX="339.0" layoutY="19.0" prefHeight="26.0" prefWidth="75.0" />
-                                <Button layoutX="343.0" layoutY="110.0" mnemonicParsing="false" onAction="#addRecipe" stylesheets="@style.css" text="Add Recipe" />
-                                <ListView fx:id="recipeListView" layoutX="18.0" layoutY="94.0" prefHeight="200.0" prefWidth="302.0" />
-                                <Button layoutX="343.0" layoutY="208.0" mnemonicParsing="false" onAction="#deleteRecipe" stylesheets="@style.css" text="Delete Recipe" />
+                                <TextField fx:id="grams" layoutX="486.0" layoutY="350.0" prefHeight="26.0" prefWidth="90.0" promptText="Measurement" />
+                                <Button layoutX="32.0" layoutY="316.0" mnemonicParsing="false" onAction="#addRecipe" stylesheets="@style.css" text="Add Recipe" />
+                                <ListView fx:id="recipeListView" layoutX="18.0" layoutY="94.0" prefHeight="200.0" prefWidth="172.0" />
+                                <Button layoutX="215.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteRecipe" stylesheets="@style.css" text="Delete Recipe" />
                                 <Label layoutX="14.0" layoutY="23.0" text="Pick Baked Good:" />
                                 <ChoiceBox fx:id="bakedGoodChoice" layoutX="109.0" layoutY="20.0" prefHeight="25.0" prefWidth="119.0" />
+                        <TextField fx:id="recipeName" layoutX="33.0" layoutY="57.0" prefHeight="26.0" prefWidth="75.0" promptText="Name" />
+                        <ListView fx:id="ingredientList2" layoutX="444.0" layoutY="94.0" prefHeight="200.0" prefWidth="173.0" />
+                        <Button layoutX="483.0" layoutY="316.0" mnemonicParsing="false" onAction="#addIngredientToRecipe" stylesheets="@style.css" text="Add Ingredient" />
+                        <ListView fx:id="recipeIngredientListView" layoutX="231.0" layoutY="94.0" prefHeight="200.0" prefWidth="172.0" />
                             </children>
                         </AnchorPane>
                     </content>
