@@ -224,8 +224,8 @@ public class Controller {
 
     }
 
-    @FXML
-    public void Load(ActionEvent event) throws Exception {
+
+    public void Load() throws Exception {
         //list of classes that you wish to include in the serialisation, separated by a comma
         Class<?>[] classes = new Class[]{BakedGoods.class, Recipe.class, Ingredients.class, LinkedList.class, Node.class};
 
@@ -235,13 +235,23 @@ public class Controller {
         xstream.allowTypes(classes);
 
         //doing the actual serialisation to an XML file
-        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("baking.xml"));
-        goods = (LinkedList<BakedGoods>) is.readObject();
-        ingredientsList = (LinkedList<Ingredients>) is.readObject();
-        is.close();
+        ObjectInputStream in = xstream.createObjectInputStream(new FileReader("baking.xml"));
+        goods = (LinkedList<BakedGoods>) in.readObject();
+        ingredientsList = (LinkedList<Ingredients>) in.readObject();
+        in.close();
         populateBakedGoodList();
         populateIngredientList();
         //populateRecipes();
+    }
+
+
+    @FXML
+    private void loadApp(ActionEvent action) {
+        try {
+            Load();
+        } catch (Exception e) {
+            System.err.println("Error reading from file: " + e);
+        }
     }
 
     @FXML
@@ -255,7 +265,7 @@ public class Controller {
     }
 
     @FXML
-    public void Save(ActionEvent event) throws Exception {
+    public void Save() throws Exception {
         XStream xstream = new XStream(new DomDriver());
         ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("baking.xml"));
         LinkedList<BakedGoods> list = goods;
@@ -263,6 +273,14 @@ public class Controller {
         out.writeObject(list);
         out.writeObject(list2);
         out.close();
+    }
+
+    public void saveApp(ActionEvent action) {
+        try {
+            Save();
+        } catch (Exception e) {
+            System.err.println("Error writing to file: " + e);
+        }
     }
 
     @FXML
