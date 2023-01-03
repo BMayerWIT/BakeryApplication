@@ -12,11 +12,12 @@ import javafx.scene.input.MouseEvent;
 public class Controller {
 
     public LinkedList<BakedGoods> goods = new LinkedList<>();
-
     public LinkedList<Ingredients> ingredientsList = new LinkedList<>();
-
     private int printGoodIndex = 0;
     private String bakedGoodsList = "";
+    private String ingredientNameList = "";
+
+
 
     @FXML
     private ChoiceBox<BakedGoods> bakedGoodChoice;
@@ -34,7 +35,7 @@ public class Controller {
     private TextField calories;
 
     @FXML
-    private ChoiceBox<?> chooseIngredient;
+    private ChoiceBox<Ingredients> chooseIngredient;
 
     @FXML
     private TextField goodDescription;
@@ -46,7 +47,7 @@ public class Controller {
     private TextField ingredientDescription;
 
     @FXML
-    private ListView<?> ingredientList;
+    private ListView<Ingredients> ingredientsListView;
 
     @FXML
     private TextField ingredientName;
@@ -151,9 +152,28 @@ public class Controller {
     }
 
     @FXML
-    void addDisplayTray(MouseEvent event) {
-
+    public void addIngredient (ActionEvent actionEvent) {
+        Ingredients ingredient = new Ingredients(ingredientName.getText(), ingredientDescription.getText(), Integer.parseInt(calories.getText()));
+        ingredientsList.add(ingredient);
+        populateIngredientList();
+        chooseIngredient.getItems().add(ingredient);
     }
+
+    public void populateIngredientList() {
+        ingredientsListView.getItems().clear();
+        for (int i = 0; i < ingredientsList.numberOfNodes(); i++) {
+            Ingredients ig = (Ingredients) ingredientsList.get(i+1);
+            ingredientsListView.getItems().add(ig);
+            ingredientNameList += ig.getIngredientName();
+        }
+    }
+
+    public void deleteIngredient(ActionEvent event) {
+        ingredientsList.deleteNode(ingredientsListView.getSelectionModel().getSelectedIndex());
+        populateIngredientList();
+        ingredientNameList = "";
+    }
+
 
     @FXML
     void addRecipe(ActionEvent event) {

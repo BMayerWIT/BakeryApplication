@@ -48,13 +48,13 @@
                                 <TextField fx:id="ingredientDescription" layoutX="348.0" layoutY="20.0" prefHeight="26.0" prefWidth="70.0" />
                                 <Label layoutX="14.0" layoutY="169.0" />
                                 <TextField fx:id="calories" layoutX="138.0" layoutY="61.0" prefHeight="26.0" prefWidth="78.0" />
-                                <Button layoutX="373.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#addDisplayTray" stylesheets="@style.css" text="Add Ingredient" />
+                                <Button layoutX="373.0" layoutY="117.0" mnemonicParsing="false" onAction="#addIngredient" onMouseClicked="#addDisplayTray" stylesheets="@style.css" text="Add Ingredient" />
                                 <ListView fx:id="ingredientList" layoutX="23.0" layoutY="99.0" prefHeight="194.0" prefWidth="325.0" />
                                 <Label layoutX="14.0" layoutY="61.0" prefHeight="26.0" prefWidth="124.0" text="Calories(kcal per 100g):" />
                                 <Label layoutX="234.0" layoutY="24.0" text="Textual Description:" />
-                                <Button layoutX="373.0" layoutY="165.0" mnemonicParsing="false" text="Edit" />
-                                <Button layoutX="443.0" layoutY="165.0" mnemonicParsing="false" text="Update" />
-                                <Button layoutX="373.0" layoutY="215.0" mnemonicParsing="false" text="Delete Ingredient" />
+                                <Button layoutX="373.0" layoutY="165.0" mnemonicParsing="false" onAction="#editIngredient" text="Edit" />
+                                <Button layoutX="443.0" layoutY="165.0" mnemonicParsing="false" onAction="#updateIngredient" text="Update" />
+                                <Button layoutX="373.0" layoutY="215.0" mnemonicParsing="false" onAction="#deleteIngredient" text="Delete Ingredient" />
                             </children>
                         </AnchorPane>
                     </content>

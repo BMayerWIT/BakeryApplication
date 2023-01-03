@@ -2,24 +2,24 @@ package Models;
 
 public class Ingredients {
 
-    private String bakedGoodName;
+    private String ingredientName;
 
     private String description;
 
     private int calories = 0;
 
-    public Ingredients(String bakedGoodName, String description, int calories) {
-        this.bakedGoodName = bakedGoodName;
+    public Ingredients(String ingredientName, String description, int calories) {
+        this.ingredientName = ingredientName;
         this.description = description;
         this.calories = calories;
     }
 
-    public String getBakedGoodName() {
-        return bakedGoodName;
+    public String getIngredientName() {
+        return ingredientName;
     }
 
-    public void setBakedGoodName(String bakedGoodName) {
-        this.bakedGoodName = bakedGoodName;
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
     }
 
     public String getDescription() {
@@ -42,7 +42,7 @@ public class Ingredients {
     public String
     toString() {
         return "Ingredients{" +
-                "bakedGoodName='" + bakedGoodName + '\'' +
+                "ingredientName='" + ingredientName + '\'' +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
                 '}';
