@@ -1,5 +1,8 @@
 package com.example.bakeryapplication;
 
+import Resources.Node;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import Models.BakedGoods;
 import Models.Ingredients;
 import Models.Recipe;
@@ -8,6 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Controller {
 
@@ -19,10 +27,6 @@ public class Controller {
     private String bakedGoodsList = "";
     private String ingredientNameList = "";
     private String recipeNameList = "";
-
-
-
-
 
     @FXML
     private ChoiceBox<BakedGoods> bakedGoodChoice;
@@ -210,7 +214,7 @@ public class Controller {
                     if (selectedObject.equals(selectedRecipe)) {
                         for (int k = 0; k < selectedRecipe.ingredients.numberOfNodes(); k++) {
                             Ingredients selectedIngredient = (Ingredients) selectedRecipe.ingredients.get(i + 1);
-                                searchedIngredientList.getItems().add(selectedIngredient);
+                            searchedIngredientList.getItems().add(selectedIngredient);
 
                         }
                     }
@@ -221,18 +225,44 @@ public class Controller {
     }
 
     @FXML
-    void Load(ActionEvent event) {
+    public void Load(ActionEvent event) throws Exception {
+        //list of classes that you wish to include in the serialisation, separated by a comma
+        Class<?>[] classes = new Class[]{BakedGoods.class, Recipe.class, Ingredients.class, LinkedList.class, Node.class};
 
+        //setting up the xstream object with default security and the above classes
+        XStream xstream = new XStream(new DomDriver());
+        XStream.setupDefaultSecurity(xstream);
+        xstream.allowTypes(classes);
+
+        //doing the actual serialisation to an XML file
+        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("baking.xml"));
+        goods = (LinkedList<BakedGoods>) is.readObject();
+        ingredientsList = (LinkedList<Ingredients>) is.readObject();
+        is.close();
+        populateBakedGoodList();
+        populateIngredientList();
+        //populateRecipes();
     }
 
     @FXML
-    void Reset(ActionEvent event) {
-
+    //deletes all data and clears all listviews
+    public void Reset(ActionEvent event) {
+        goods.remove();
+        ingredientsList.remove();
+        bakedGoodListView.getItems().clear();
+        searchIngredientList.getItems().clear();
+        recipeListView.getItems().clear();
     }
 
     @FXML
-    void Save(ActionEvent event) {
-
+    public void Save(ActionEvent event) throws Exception {
+        XStream xstream = new XStream(new DomDriver());
+        ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("baking.xml"));
+        LinkedList<BakedGoods> list = goods;
+        LinkedList<Ingredients> list2 = ingredientsList;
+        out.writeObject(list);
+        out.writeObject(list2);
+        out.close();
     }
 
     @FXML
@@ -279,7 +309,7 @@ public class Controller {
     void addRecipe(ActionEvent event) {
         String rName = recipeName.getText();
 
-         Recipe recipe = new Recipe(rName);
+        Recipe recipe = new Recipe(rName);
         if (recipeNameList.contains(rName)) {
             System.out.println(("Baked Good with this name already exists."));
         } else {
