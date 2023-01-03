@@ -10,7 +10,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("BakeryApplic.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 621, 329);
+        Scene scene = new Scene(fxmlLoader.load(), 643, 454);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

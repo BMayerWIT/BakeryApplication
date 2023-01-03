@@ -94,15 +94,5 @@ public class LinkedList<W> {
         return nodeCount;
     }
 
-    public boolean search(String name) {
-        Node current = head;
-        while (current != null) {
-            if (current.nodeData.getClass().getName().equals(name)) {
-                return true;
-            }
-            current = current.next;
-        }
-        return false;
-    }
 }
 
