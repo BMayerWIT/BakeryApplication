@@ -4,6 +4,7 @@ public class LinkedList<W> {
     private Node head = null;
     private int nodeCount = 1;
 
+
     public LinkedList() {}
 
     public void add(Object obj) {

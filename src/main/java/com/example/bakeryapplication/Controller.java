@@ -3,30 +3,55 @@ package com.example.bakeryapplication;
 import Models.BakedGoods;
 import Models.Ingredients;
 import Resources.LinkedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class Controller {
 
-    public LinkedList<BakedGoods> goods = new LinkedList<>();
+    public static LinkedList<BakedGoods> goods = new LinkedList<>();
+
+    public static LinkedList<Ingredient> ingredient = new LinkedList<>();
 
     private int printGoodIndex = 0;
     private String bakedGoodsList = "";
 
+
+    //BakedGood
+
     @FXML
     private TextField goodName;
+    public TextField origin;
     @FXML
     private ComboBox<String> originCountry;
     @FXML
     private TextField bakedGoodDescription;
     @FXML
     private ComboBox<BakedGoods> bakedGoodChoice;
+    public ListView<String> Bgood; //lists and displays added goods
+
+    //Ingredients
+
+    public TextField nameIng;
+    public TextField textualdescription;
+    public TextField cals;
+    public ListView<String> ingredients;
+
+
+    //Recipe
+
+    public TextField RecipeName;
+    public ChoiceBox<BakedGoods> pickbgood;
+    public ChoiceBox<Ingredient> chooseIngredient;
+    public TextField grmls; //grams & mls
+
+    public ListView<String> recipe;
+
+
     @FXML
-    private TextField searchField;
+    public TextField search;
 
 
 
@@ -55,7 +80,29 @@ public class Controller {
       //  goods.deleteNode(selectedGood.getIngredientIndex());
 
     }
-    
+
+
+
+
+
+    public void addIngr (ActionEvent actionEvent) {
+        Ingredient ingredient = new Ingredient(nameIng.getText(), textualdescription.getText(), Float.parseFloat(cals.getText()));
+        ingredient.addNode(ingredient);
+        popListBoxingredient();
+        chooseIngredient.getItems().add(ingredient);
+    }
+
+    public void popListBoxingredient(){
+        ingredients.getItems().clear();
+        Node temp = ingredient.getHead();
+        while (temp !=null) {
+            ingredient.getItems().add(temp.getData().toString());
+            temp = temp.getNext();
+        }
+    }
+
+
+
     void Search() {
         String searchedPhrase = searchField.getText();
         for (int i = 0; i < goods.numberOfNodes() + 1; i++) {
