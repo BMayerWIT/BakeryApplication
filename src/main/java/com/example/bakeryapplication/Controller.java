@@ -98,7 +98,7 @@ public class Controller {
         String description = goodDescription.getText();
         BakedGoods bg = new BakedGoods(goodName, countryOfOrigin, description);
         if (bakedGoodsList.contains(goodName)) {
-            System.out.println(("Recipe with this name already exists."));
+            System.out.println(("Baked Good  with this name already exists."));
         } else {
             goods.add(bg);
             bakedGoodsList += goodName;
@@ -136,7 +136,9 @@ public class Controller {
         if (searchFilter.getSelectionModel().getSelectedItem().contains("Baked Good")) {
             for (int i = 0; i < goods.numberOfNodes(); i++) {
                 BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
-                if (selectedGood.getBakedGoodName().contains(searchedPhrase)) {
+                if (selectedGood.getBakedGoodName().toLowerCase().contains(searchedPhrase.toLowerCase())
+                        || selectedGood.getDescription().toLowerCase().contains(searchedPhrase.toLowerCase())
+                        || selectedGood.getCountryOfOrigin().toLowerCase().contains(searchedPhrase.toLowerCase())) {
                     searchList.getItems().add(selectedGood);
                 }
             }
@@ -147,7 +149,7 @@ public class Controller {
                 BakedGoods selectedGood = (BakedGoods) goods.get(i + 1);
                 for (int k = 0; k < selectedGood.recipes.numberOfNodes(); k++) {
                     Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
-                    if (selectedRecipe.getRecipeName().contains(searchedPhrase)) {
+                    if (selectedRecipe.getRecipeName().toLowerCase().contains(searchedPhrase.toLowerCase())) {
                         searchList.getItems().add(selectedRecipe);
                     }
                 }
@@ -161,7 +163,8 @@ public class Controller {
                     Recipe selectedRecipe = (Recipe) selectedGood.recipes.get(i);
                     for (int j = 0; j < selectedRecipe.ingredients.numberOfNodes(); j++) {
                         Ingredients selectedIngredient = (Ingredients) selectedRecipe.ingredients.get(i);
-                        if (selectedIngredient.getIngredientName().contains(searchedPhrase)) {
+                        if (selectedIngredient.getIngredientName().toLowerCase().contains(searchedPhrase.toLowerCase())
+                                || selectedIngredient.getDescription().toLowerCase().contains(searchedPhrase.toLowerCase())) {
                             searchList.getItems().add(selectedIngredient);
                         }
                     }
@@ -241,7 +244,8 @@ public class Controller {
         in.close();
         populateBakedGoodList();
         populateIngredientList();
-        //populateRecipes();
+        populateRecipeList();
+
     }
 
 
@@ -329,7 +333,7 @@ public class Controller {
 
         Recipe recipe = new Recipe(rName);
         if (recipeNameList.contains(rName)) {
-            System.out.println(("Baked Good with this name already exists."));
+            System.out.println(("Recipe with this name already exists."));
         } else {
             BakedGoods selectedGood = bakedGoodChoice.getSelectionModel().getSelectedItem();
             selectedGood.recipes.add(recipe);
@@ -381,46 +385,82 @@ public class Controller {
         populateRecipeIngredientListView();
     }
 
-
-    @FXML
-    void editBakedGood(ActionEvent event) {
-
-    }
-
-    @FXML
-    void editIngredient(ActionEvent event) {
-
-    }
-
-    @FXML
-    void editRecipe(ActionEvent event) {
-
-    }
-
-
     @FXML
     void updateBakedGood(ActionEvent event) {
+        BakedGoods selectedGood = bakedGoodListView.getSelectionModel().getSelectedItem();
+        String goodName = bakedGoodName.getText();
+        String countryOfOrigin = originCountry.getText();
+        String description = goodDescription.getText();
+
+        if (bakedGoodsList.contains(goodName)) {
+            System.out.println(("Baked Good with this name already exists."));
+        } else {
+            selectedGood.setBakedGoodName(goodName);
+            selectedGood.setCountryOfOrigin(countryOfOrigin);
+            selectedGood.setDescription(description);
+            populateBakedGoodList();
+        }
 
     }
 
     @FXML
     void updateIngredient(ActionEvent event) {
+        Ingredients selectedIngredient = ingredientListView.getSelectionModel().getSelectedItem();
+        String igName = ingredientName.getText();
+        String description = ingredientDescription.getText();
+        int cals = Integer.parseInt(calories.getText());
 
+        if (ingredientNameList.contains(igName)) {
+            System.out.println(("Ingredient with this name already exists."));
+        } else {
+            selectedIngredient.setIngredientName(igName);
+            selectedIngredient.setDescription(description);
+            selectedIngredient.setCalories(cals);
+            populateIngredientList();
+        }
     }
 
     @FXML
     void updateRecipe(ActionEvent event) {
-
+        Recipe selectedRecipe = recipeListView.getSelectionModel().getSelectedItem();
+        String rName = recipeName.getText();
+        if (recipeNameList.contains(rName)) {
+            System.out.println(("Recipe with this name already exists."));
+        } else {
+            if (rName != null) {
+                selectedRecipe.setRecipeName(rName);
+                populateRecipeList();
+            }
+            else {
+                System.out.println("Couldn't Update Name");
+            }
+        }
     }
 
     @FXML
-    void viewAllBakedGoods(ActionEvent event) {
-
+    void updateIngredientQuantity() {
+        Ingredients selectedIngredient = recipeIngredientListView.getSelectionModel().getSelectedItem();
+        float quantity = Float.parseFloat(grams.getText());
+        if (quantity != 0) {
+            selectedIngredient.setQuantity(quantity);
+            populateRecipeIngredientListView();
+        }
+        else {
+            System.out.println("Couldn't Update Quantity");
+        }
     }
+
+    @FXML
+    void removeIngredient(ActionEvent event) {
+        Recipe selectedRecipe = recipeListView.getSelectionModel().getSelectedItem();
+        int ingredientIndex = recipeIngredientListView.getSelectionModel().getSelectedIndex();
+        selectedRecipe.ingredients.deleteNode(ingredientIndex);
+        populateRecipeIngredientListView();
+    }
+
 
     public void initialize() {
         searchFilter.getItems().addAll("Baked Good", "Ingredients", "Recipe");
     }
-
 
 }

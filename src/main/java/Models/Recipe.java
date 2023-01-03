@@ -25,8 +25,7 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe{" +
-                "recipeName='" + recipeName + '\'' +
-                '}';
+        return recipeName;
     }
+
 }

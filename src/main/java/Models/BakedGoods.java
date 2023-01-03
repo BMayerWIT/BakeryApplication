@@ -63,10 +63,8 @@ public class BakedGoods {
 
     @Override
     public String toString() {
-        return "BakedGoods{" +
-                "bakedGoodName='" + bakedGoodName + '\'' +
-                ", countryOfOrigin='" + countryOfOrigin + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return bakedGoodName + '\'' +
+                ", " + countryOfOrigin + '\'' +
+                ", " + description + '\'' ;
     }
 }
