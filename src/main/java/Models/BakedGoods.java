@@ -4,10 +4,10 @@ import Resources.LinkedList;
 
 public class BakedGoods {
 
-    public LinkedList<Ingredients> ingredients = new LinkedList<>();
+
     public LinkedList<Recipe> recipes = new LinkedList<>();
 
-    private String bakedGoodName;
+    private String bakedGoodName = "";
     private String countryOfOrigin;
     private String description;
 

@@ -4,6 +4,7 @@ public class LinkedList<W> {
     private Node head = null;
     private int nodeCount = 1;
 
+
     public LinkedList() {}
 
     public void add(Object obj) {
@@ -34,36 +35,49 @@ public class LinkedList<W> {
             if (index == 0) {
                 if (head.getNext() == null) {
                     head = null;
-                }
-                else {
+                } else {
                     head = head.getNext();
                 }
             }
             index--;
             Node selectedNode = head;
-            for (int i = 0; i < index; i++) {
-                selectedNode = selectedNode.getNext();
+            if (selectedNode != null) {
+                for (int i = 0; i < index; i++) {
+                    selectedNode = selectedNode.getNext();
+                }
+                if (selectedNode.getNext() != null) {
+                    Node point = selectedNode.getNext().getNext();
+                    if (point != null) {
+                        selectedNode.setNext(point);
+                    } else {
+                        selectedNode.setNext(null);
+                    }
+                } else {
+                    selectedNode.setNext(null);
+                }
+                nodeCount--;
             }
-            Node point = selectedNode.getNext().getNext();
-            if (point != null) {
-                selectedNode.setNext(point);
-            }
-            else {
-                selectedNode.setNext(null);
+            else if (selectedNode == null) {
+                head = null;
             }
         }
     }
 
     public Object get(int index) {
-        if (index == 0)
+        if (index == 0) {
             return head.getNodeData();
-        Node current = null;
-        if (head != null) {
-            current = head.getNext();
+        }
+
+        Node current = head;
+
+        if (current != null) {
             for (int i = 1; i < index; i++) {
-                if (current.getNext() == null)
+
+                if (current.getNext() == null) {
                     return null;
-                current = current.getNext();
+                } else {
+                    current = current.getNext();
+                }
             }
             return current.getNodeData();
         }
