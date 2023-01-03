@@ -101,6 +101,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream-benchmark</artifactId>
+            <version>1.4.20</version>
+        </dependency>
     </dependencies>
 
     <build>
