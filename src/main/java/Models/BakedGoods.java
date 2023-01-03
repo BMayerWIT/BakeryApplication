@@ -7,7 +7,7 @@ public class BakedGoods {
 
     public LinkedList<Recipe> recipes = new LinkedList<>();
 
-    private String bakedGoodName;
+    private String bakedGoodName = "";
     private String countryOfOrigin;
     private String description;
 
