@@ -1,0 +1,28 @@
+<object-stream>
+  <Resources.LinkedList>
+    <head>
+      <nodeData class="Models.BakedGoods">
+        <recipes>
+          <nodeCount>1</nodeCount>
+        </recipes>
+        <bakedGoodName>ff</bakedGoodName>
+        <countryOfOrigin>ff</countryOfOrigin>
+        <description>ff</description>
+        <ingredientNameList></ingredientNameList>
+        <ingredientIndex>0</ingredientIndex>
+      </nodeData>
+    </head>
+    <nodeCount>1</nodeCount>
+  </Resources.LinkedList>
+  <Resources.LinkedList>
+    <head>
+      <nodeData class="Models.Ingredients">
+        <ingredientName>eee</ingredientName>
+        <description>ee</description>
+        <calories>2</calories>
+        <quantity>0.0</quantity>
+      </nodeData>
+    </head>
+    <nodeCount>1</nodeCount>
+  </Resources.LinkedList>
+</object-stream>
