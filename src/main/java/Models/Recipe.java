@@ -8,11 +8,13 @@ public class Recipe {
 
     String recipeName = "";
 
+    //constructor
     public Recipe(String recipeName) {
         this.recipeName = recipeName;
 
     }
 
+    //setters and getters
     public String getRecipeName() {
         return recipeName;
     }

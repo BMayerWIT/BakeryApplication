@@ -10,12 +10,14 @@ public class Ingredients {
 
     private float quantity = 0;
 
+    //constructor
     public Ingredients(String ingredientName, String description, int calories) {
         this.ingredientName = ingredientName;
         this.description = description;
         this.calories = calories;
     }
 
+    //setters and getters
     public String getIngredientName() {
         return ingredientName;
     }

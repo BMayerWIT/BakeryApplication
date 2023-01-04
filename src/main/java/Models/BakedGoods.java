@@ -15,12 +15,14 @@ public class BakedGoods {
 
     private int ingredientIndex = 0;
 
+    //constructor
     public BakedGoods(String bakedGoodName, String countryOfOrigin, String description) {
         this.bakedGoodName = bakedGoodName;
         this.countryOfOrigin = countryOfOrigin;
         this.description = description;
     }
 
+    //getters and setters
     public String getBakedGoodName() {
         return bakedGoodName;
     }
